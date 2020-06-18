@@ -18,10 +18,52 @@ Both logging and reading use a mutex around a single buffer, and therefore may b
 should be good enough for most scenarios, and has a smaller memory overhead and better
 locality (single buffer).
 
+```rust
+use regex::Regex;
+
+use memory_logger::blocking::MemoryLogger;
+
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+	let target = Regex::new("^mycrate::my_module")?; // optional
+	let logger = MemoryLogger::setup(log::Level::Info, target)?;
+
+	log::info!("This is a info.");
+	log::warn!("This is a warning.");
+
+	let contents = logger.read();
+
+	assert!(contents.contains("This is a info."));
+	assert!(contents.contains("This is a warning."));
+	Ok(())
+}
+```
+
 ### Asynchronous
 
 Both logging and reading use a channel, and may never block. This should be faster for
 high contention scenarios, but has a higher memory overhead and worse locality.
+
+```rust
+use regex::Regex;
+
+use memory_logger::asynchronous::MemoryLogger;
+
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+	let target = Regex::new("^mycrate::my_module")?; // optional
+	let logger = MemoryLogger::setup(log::Level::Info, target)?;
+
+	log::info!("This is a info.");
+	log::warn!("This is a warning.");
+
+	let mut reader = logger.read();
+
+	assert!(reader.next().unwrap().contains("This is a info."));
+	assert!(reader.next().unwrap().contains("This is a warning."));
+	Ok(())
+}
+```
 
 ## Simplicity
 

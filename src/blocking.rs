@@ -117,7 +117,7 @@ impl MemoryLogger {
 	/// # log::info!(target: "mycrate::my_module", "This is a info.");
 	/// # log::warn!(target: "mycrate::my_module", "This is a warning.");
 	///
-	/// let mut contents = logger.read();
+	/// let contents = logger.read();
 	///
 	/// assert!(contents.contains("This is a info."));
 	/// assert!(contents.contains("This is a warning."));
