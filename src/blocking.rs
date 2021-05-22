@@ -61,7 +61,7 @@ impl Log for Logger {
 				buffer,
 				"[{}] {:<5} | {}",
 				target,
-				record.level().to_string(),
+				record.level(),
 				record.args()
 			)
 				.expect("std::fmt::Write should never fail for String");

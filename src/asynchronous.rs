@@ -46,7 +46,7 @@ impl Log for Logger {
 				format!(
 					"[{}] {:<5} | {}",
 					target,
-					record.level().to_string(),
+					record.level(),
 					record.args()
 				)
 					.into_boxed_str()
