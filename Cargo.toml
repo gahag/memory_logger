@@ -20,7 +20,7 @@ asynchronous = [ "flume" ]
 
 [dependencies]
 log = { version = "0.4", features = [ "std" ] }
-flume = { version = "0.7", default-features = false, optional = true }
+flume = { version = "0.10", default-features = false, optional = true }
 regex = { version = "1.3", optional = true }
 
 
