@@ -13,7 +13,7 @@ categories = [ "development-tools::debugging" ]
 
 [features]
 target = [ "regex" ]
-# There are mutually exclusive:
+# These are mutually exclusive:
 blocking = [ ]
 asynchronous = [ "flume" ]
 
